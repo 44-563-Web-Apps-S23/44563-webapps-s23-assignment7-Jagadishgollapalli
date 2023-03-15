@@ -200,39 +200,58 @@
     }
 
     function help() {
-      let catRow = Math.floor(catLocation/4);
-            let catColumn = catLocation % 6;
-            let mouseRow = Math.floor(mouseLocation/4);
-            let mouseColumn = mouseLocation % 6;
-            let lastRow = Math.floor(lastCheck/4);
-            let lastColumn = lastCheck % 6;
-            console.log(catRow, catColumn, mouseRow, mouseColumn, lastRow, lastColumn);
-            penalty = penalty+2;
-            document.getElementById("penalty").innerHTML = "Penalty is "+penalty;
-            if((Math.abs(catRow-lastRow)<=1 && Math.abs(catColumn-lastColumn)<=1)&&(Math.abs(catRow-mouseRow)>1||Math.abs(catColumn-mouseColumn)>1)){
-                document.getElementById("help").innerText= "meow";
-            }
-           
-            else if((Math.abs(mouseRow-lastRow)<=1 && Math.abs(mouseColumn-lastColumn)<=1)&&( Math.abs(catRow-mouseRow)>1||Math.abs(catColumn-mouseColumn)>1)){
-                document.getElementById("help").innerText="squeak";
-            }
-           else{
-            document.getElementById("help").innerText= "sorry, no help available";
-           }
+      let catRow = Math.floor(catLocation / 4);
+      let catColumn = catLocation % 6;
+      let mouseRow = Math.floor(mouseLocation / 4);
+      let mouseColumn = mouseLocation % 6;
+      let lastRow = Math.floor(lastCheck / 4);
+      let lastColumn = lastCheck % 6;
+      console.log(
+        catRow,
+        catColumn,
+        mouseRow,
+        mouseColumn,
+        lastRow,
+        lastColumn
+      );
+      penalty = penalty + 2;
+      document.getElementById("penalty").innerHTML = "Penalty is " + penalty;
+      if (
+        Math.abs(catRow - lastRow) <= 1 &&
+        Math.abs(catColumn - lastColumn) <= 1 &&
+        (Math.abs(catRow - mouseRow) > 1 ||
+          Math.abs(catColumn - mouseColumn) > 1)
+      ) {
+        document.getElementById("help").innerText = "meow";
+      } else if (
+        Math.abs(mouseRow - lastRow) <= 1 &&
+        Math.abs(mouseColumn - lastColumn) <= 1 &&
+        (Math.abs(catRow - mouseRow) > 1 ||
+          Math.abs(catColumn - mouseColumn) > 1)
+      ) {
+        document.getElementById("help").innerText = "squeak";
+      } else {
+        document.getElementById("help").innerText = "sorry, no help available";
+      }
     }
 
     function resetGame() {
       let mouseLocation = Math.floor(Math.random() * 24);
-      console.log("mouse location " +mouseLocation);
+      console.log("mouse location " + mouseLocation);
       let catLocation = Math.floor(Math.random() * 24);
       console.log("cat location " + catLocation);
       document.getElementById("bushes").innerText =
         "Number of bushes checked is " + 0;
-      document.getElementById("penalty").innerText =
-        "Penalty is " + 0;
-        for(i=0;i<24;i++){
+      document.getElementById("penalty").innerText = "Penalty is " + 0;
+      for (i = 0; i < 24; i++) {
+        if (i == mouseLocation) {
+          document.getElementById(imageID[i]).src = "./images/mouse.jpg";
+        } else if (i == catLocation) {
+          document.getElementById(imageID[i]).src = "./images/tiger.jpg";
+        } else {
           document.getElementById(imageID[i]).src = "./images/bush.jpg";
         }
+      }
     }
   </script>
-</html> 
+</html>
